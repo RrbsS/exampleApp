@@ -58,7 +58,7 @@ export class GridComponent implements OnInit {
     this.displayBookDialog = true;
   }
 
-  onBookSave(event:Book,)
+  onBookSave(event:Book)
   {
       if(event && this.isNew)
       {
