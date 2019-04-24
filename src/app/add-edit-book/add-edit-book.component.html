@@ -1,0 +1,28 @@
+<p-dialog [header]="dialogHeader"  visible="true" [contentStyle]="{'overflow': 'visible'}" [responsive]="true"
+  showEffect="fade" [modal]="true" [width]="600">
+  <div class="ui-g ui-fluid">
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <input type="text" pInputText [(ngModel)]="book.Title" placeholder="Title"/>
+      </div>
+      <div class="ui-g-4">
+        <input type="text" pInputText [(ngModel)]="book.Description" placeholder="Description"/>
+      </div>
+      <div class="ui-g-4">
+        <input type="text" pInputText [(ngModel)]="book.Excerpt" placeholder="Excerpt"/>
+      </div>
+    </div>
+    <div class="ui-g-12">
+        <div class="ui-g-4"> 
+          <p-calendar [(ngModel)]="book.PublishDate" dateFormat="dd.mm.yy" placeholder="PublishDate"></p-calendar>
+        </div>
+        <div class="ui-g-4">
+            <input type="number" pInputText [(ngModel)]="book.PageCount" placeholder="Page count"/>
+          </div>
+    </div>
+  </div>
+  <p-footer>
+      <button type="button" pButton icon="pi pi-check" (click)="saveData(book)" label="Save"></button>
+      <button type="button" pButton icon="pi pi-close" (click)="cancel()" label="Cancel" class="ui-button-secondary"></button>
+  </p-footer>
+  </p-dialog>

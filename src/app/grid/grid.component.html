@@ -1,0 +1,46 @@
+<p-table [columns]="cols" [value]="books" dataKey="Title" [scrollable]="true" scrollHeight="500px"
+[(contextMenuSelection)]="selectedBook"
+  [contextMenu]="contextMenu">
+
+  <ng-template pTemplate="caption" let-rowData>
+        <div style="text-align:right" class="ui-g">
+          <div class="ui-g-12" style="float:right">
+            <button type="button" pButton class="action" icon="fa fa-plus" (click)="showAddBook()"
+              label="Add book"></button>
+          </div>
+        </div>
+      </ng-template>
+
+  <ng-template pTemplate="header" let-columns>
+      <tr>
+          <th *ngFor="let col of columns">
+              {{col.header}}
+          </th>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr [pSelectableRow]="rowData" [pContextMenuRow]="rowData">
+        <td *ngFor="let col of columns">
+          <div *ngIf="col.type==='Date'; else nonDateDiv">
+            {{rowData[col.field] | date:'dd.MM.yyyy'}}
+          </div>
+          <ng-template #nonDateDiv>{{rowData[col.field]}}</ng-template>
+        </td>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="summary">
+      <div style="text-align: left">
+          Selected Book: {{selectedBook ? selectedBook.Title : 'none'}}
+      </div>
+      <div style="text-align: right">
+            Books number: {{books.length}}
+      </div>
+  </ng-template>
+</p-table>
+
+
+<app-add-edit-book *ngIf="displayBookDialog" [book]="bookToSave"  (onSave)="onBookSave($event)"></app-add-edit-book>
+
+<p-contextMenu #contextMenu [model]="contextMenuModel" [appendTo]="'body'"></p-contextMenu>
+
+<p-confirmDialog key="bookDelete"></p-confirmDialog>
